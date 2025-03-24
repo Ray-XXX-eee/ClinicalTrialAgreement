@@ -1,0 +1,4 @@
+venv
+faiss_index.pkl
+metadata.pkl
+data

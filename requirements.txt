@@ -1,0 +1,26 @@
+python-dotenv
+# langchain.core==0.3.33
+# langchain-openai==0.3.3 
+# langchain-community==0.3.16 
+# langchain-text-splitters
+langchain-huggingface
+
+# llama-index
+# llama-index-readers-web
+# google-generativeai
+# llama-index-llms-gemini
+pypdf
+# IPython
+# llama-index-embeddings-gemini
+streamlit
+llama-index-llms-huggingface
+# groq
+# langchain-groq
+# langchain_google_genai
+faiss-cpu
+
+#extra 
+pinecone
+python-docx
+torch
+reportlab
