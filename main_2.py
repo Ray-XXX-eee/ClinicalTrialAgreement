@@ -47,7 +47,19 @@ def add_clause_to_faiss(text, clause_type):
 # Sample clauses (only if the FAISS index is empty)
 if index.ntotal == 0:
     sample_clauses = [
-        ("The Sponsor agrees to indemnify the Institution from any liability...", "Indemnification"),
+        ("""To the extent not expressly prohibited by state law,
+Institution shall indemnify and hold harmless Sponsor, its
+affiliates and their respective employees, officers and
+directors (Sponsor Indemnitees) from and against any Claims
+arising out of the physical illness, injury or death of a Study
+subject due to (a) the failure of a Institutional Indemnitee to
+adhere to the terms of the Protocol and this Agreement; or
+(ii) the negligence or willful misconduct of an Institutional
+Indemnitee; provided, however, that Institution shall have no
+such obligation with respect to Claims arising out of the
+negligence or willful misconduct of a Sponsor Indemnitee.
+(continued
+         """, "Indemnification"),
         ("The Institution must keep all trial data confidential...", "Confidentiality"),
         ("The trial budget shall be disbursed in accordance with the terms outlined...", "Financial Terms"),
         ("The trial must comply with FDA regulations and EU Directives...", "Regulatory Compliance"),
@@ -109,9 +121,21 @@ def save_as_pdf(contract_text, filename="clinical_trial_agreement.pdf"):
 # Function to display PDF in Streamlit
 def display_pdf(file_path):
     with open(file_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
+        pdf_data = f.read()
+        base64_pdf = base64.b64encode(pdf_data).decode("utf-8")
+
+    # Display PDF inside Streamlit (Embed)
     pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="500px"></iframe>'
     st.markdown(pdf_display, unsafe_allow_html=True)
+
+    # Provide a download button
+    st.download_button(
+        label="📄 Download PDF",
+        data=pdf_data,
+        file_name=file_path.split("/")[-1],  # Extracts filename
+        mime="application/pdf"
+    )
+
 
 # Streamlit UI
 st.title("📝 Clinical Trial Agreement Generator (FAISS-Based)")
